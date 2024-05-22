@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
@@ -25,7 +26,13 @@ async function bootstrap() {
       persisAuthorization: true,
     },
   });
-
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
   await app.listen(3000, '0.0.0.0', () => {
     console.log('Server running on http://localhost:3000');
     console.log('Swagger running on http://localhost:3000/docs');
