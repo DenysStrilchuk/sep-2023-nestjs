@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-// import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { PostgresConnectService } from './postgres-connect.service';
+// import { ConfigService } from '@nestjs/config';
 // import { Config, DatabaseConfig } from '../configs/configs.type';
 // import { AuthEntity } from '../database/entities/auth.entity';
 // import { UserEntity } from '../database/entities/user.entity';
-import { PostgresConnectService } from './postgres-connect.service';
 
 @Module({
   imports: [
