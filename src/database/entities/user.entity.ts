@@ -13,4 +13,10 @@ export class UserEntity {
 
   @Column()
   firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  isActive: boolean;
 }
