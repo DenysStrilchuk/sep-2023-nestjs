@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import * as path from 'path';
 
-import { Config, DatabaseConfig } from '../configs/configs.type';
+import { Config, DatabaseConfig } from '../../configs/configs.type';
 
 @Injectable()
 export class PostgresConnectService implements TypeOrmOptionsFactory {
@@ -19,10 +19,24 @@ export class PostgresConnectService implements TypeOrmOptionsFactory {
       password: databaseConfig.password,
       database: databaseConfig.dbName,
       entities: [
-        path.join(process.cwd(), 'dist', 'database', 'entities', '*.entity.js'),
+        path.join(
+          process.cwd(),
+          'dist',
+          'src',
+          'database',
+          'entities',
+          '*.entity.js',
+        ),
       ],
       migrations: [
-        path.join(process.cwd(), 'src', 'database', 'migrations', '*.ts'),
+        path.join(
+          process.cwd(),
+          'dist',
+          'src',
+          'database',
+          'migrations',
+          '*.js',
+        ),
       ],
       synchronize: false,
     };
