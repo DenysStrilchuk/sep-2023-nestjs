@@ -1,34 +1,34 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 
-@Entity({ name: 'users' })
-export class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+import { ArticleEntity } from './article.entity';
+import { TableNamesEnum } from './enums/table-names.enum';
+import { LikeEntity } from './like.entity';
+import { BaseModel } from './models/base.model';
+import { RefreshTokenEntity } from './refresh-token.entity';
 
-  @Column()
+@Entity({ name: TableNamesEnum.USERS })
+export class UserEntity extends BaseModel {
+  @Column('text')
+  name: string;
+
+  @Column('text', { unique: true })
   email: string;
 
-  @Column()
+  @Column('text')
   password: string;
 
-  @Column()
-  firstName: string;
+  @Column('text', { nullable: true })
+  bio?: string;
 
-  @Column()
-  lastName: string;
+  @Column('text', { nullable: true })
+  image?: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
+  refreshToken: RefreshTokenEntity[];
 
-  @CreateDateColumn()
-  created: Date;
+  @OneToMany(() => ArticleEntity, (entity) => entity.user)
+  articles: ArticleEntity[];
 
-  @UpdateDateColumn()
-  updated: Date;
+  @OneToMany(() => LikeEntity, (entity) => entity.user)
+  likes: LikeEntity[];
 }
