@@ -11,11 +11,11 @@ export class LikeEntity extends BaseModel {
   user_id: string;
   @ManyToOne(() => UserEntity, (entity) => entity.likes)
   @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  user?: UserEntity;
 
   @Column()
   article_id: string;
   @ManyToOne(() => ArticleEntity, (entity) => entity.likes)
   @JoinColumn({ name: 'article_id' })
-  articles: ArticleEntity[];
+  article?: ArticleEntity;
 }

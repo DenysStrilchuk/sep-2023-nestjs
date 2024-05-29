@@ -1,8 +1,16 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 import { TableNamesEnum } from './enums/table-names.enum';
 import { LikeEntity } from './like.entity';
 import { BaseModel } from './models/base.model';
+import { TagEntity } from './tag.entity';
 import { UserEntity } from './user.entity';
 
 @Entity({ name: TableNamesEnum.ARTICLES })
@@ -16,12 +24,15 @@ export class ArticleEntity extends BaseModel {
   @Column('text')
   body: string;
 
+  @OneToMany(() => LikeEntity, (entity) => entity.article)
+  likes?: LikeEntity[];
+
   @Column()
   user_id: string;
   @ManyToOne(() => UserEntity, (entity) => entity.articles)
   @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  user?: UserEntity;
 
-  @OneToMany(() => LikeEntity, (entity) => entity.articles)
-  likes: LikeEntity[];
+  @ManyToMany(() => TagEntity, (entity) => entity.articles)
+  tags?: TagEntity[];
 }

@@ -24,11 +24,11 @@ export class UserEntity extends BaseModel {
   image?: string;
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
-  refreshToken: RefreshTokenEntity[];
+  refreshToken?: RefreshTokenEntity[];
 
   @OneToMany(() => ArticleEntity, (entity) => entity.user)
-  articles: ArticleEntity[];
+  articles?: ArticleEntity[];
 
   @OneToMany(() => LikeEntity, (entity) => entity.user)
-  likes: LikeEntity[];
+  likes?: LikeEntity[];
 }
