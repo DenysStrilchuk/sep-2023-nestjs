@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { LoggerService } from '../logger/logger.service';
 import { CreateUserReqDto } from './dto/req/create-user.req.dto';
