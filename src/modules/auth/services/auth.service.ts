@@ -88,6 +88,42 @@ export class AuthService {
   }
 
   public async refresh(userData: IUserData): Promise<TokenPairResDto> {
-    return AuthMapper.toResponseTokensDTO({} as any);
+    await Promise.all([
+      this.refreshTokenRepository.delete({
+        deviceId: userData.deviceId,
+        user_id: userData.userId,
+      }),
+      this.authCacheService.deleteToken(userData.userId, userData.deviceId),
+    ]);
+    const pair = await this.tokenService.generateAuthTokens({
+      userId: userData.userId,
+      deviceId: userData.deviceId,
+    });
+
+    await Promise.all([
+      this.refreshTokenRepository.save(
+        this.refreshTokenRepository.create({
+          user_id: userData.userId,
+          refreshToken: pair.refreshToken,
+          deviceId: userData.deviceId,
+        }),
+      ),
+      this.authCacheService.saveToken(
+        pair.accessToken,
+        userData.userId,
+        userData.deviceId,
+      ),
+    ]);
+    return AuthMapper.toResponseTokensDTO(pair);
+  }
+
+  public async signOut(userData: IUserData): Promise<void> {
+    await Promise.all([
+      this.refreshTokenRepository.delete({
+        deviceId: userData.deviceId,
+        user_id: userData.userId,
+      }),
+      this.authCacheService.deleteToken(userData.userId, userData.deviceId),
+    ]);
   }
 }

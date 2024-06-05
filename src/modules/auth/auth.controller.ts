@@ -17,12 +17,14 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @SkipAuth()
+  @ApiOperation({ summary: 'Sign up' })
   @Post('sign-up')
   public async singUp(@Body() dto: SignUpReqDto): Promise<AuthResDto> {
     return await this.authService.singUp(dto);
   }
 
   @SkipAuth()
+  @ApiOperation({ summary: 'Sign in' })
   @Post('sign-in')
   public async signIn(@Body() dto: SignInReqDto): Promise<AuthResDto> {
     return await this.authService.singIn(dto);
@@ -32,9 +34,17 @@ export class AuthController {
   @ApiBearerAuth()
   @UseGuards(JwtRefreshGuard)
   @ApiOperation({ summary: 'Refresh token pair' })
+  @Post('refresh')
   public async refresh(
     @CurrentUser() userData: IUserData,
   ): Promise<TokenPairResDto> {
     return await this.authService.refresh(userData);
+  }
+
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Sign out' })
+  @Post('sign-out')
+  public async signOut(@CurrentUser() userData: IUserData): Promise<void> {
+    return await this.authService.signOut(userData);
   }
 }
