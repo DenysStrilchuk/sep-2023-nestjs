@@ -7,6 +7,8 @@ import { UserService } from '../../user/services/user.service';
 import { SignInReqDto } from '../dto/req/sign-in.req.dto';
 import { SignUpReqDto } from '../dto/req/sign-up.req.dto';
 import { AuthResDto } from '../dto/res/auth.res.dto';
+import { TokenPairResDto } from '../dto/res/token-pair.res.dto';
+import { IUserData } from '../interfaces/user-data.interface';
 import { AuthMapper } from './auth.mapper';
 import { AuthCacheService } from './auth-cache.service';
 import { TokenService } from './token.service';
@@ -42,7 +44,7 @@ export class AuthService {
       ),
       this.authCacheService.saveToken(pair.accessToken, user.id, dto.deviceId),
     ]);
-    return await AuthMapper.toResponseDTO(user, pair);
+    return AuthMapper.toResponseDTO(user, pair);
   }
 
   public async singIn(dto: SignInReqDto): Promise<AuthResDto> {
@@ -82,6 +84,10 @@ export class AuthService {
       this.authCacheService.saveToken(pair.accessToken, user.id, dto.deviceId),
     ]);
     const userEntity = await this.userRepository.findOneBy({ id: user.id });
-    return await AuthMapper.toResponseDTO(userEntity, pair);
+    return AuthMapper.toResponseDTO(userEntity, pair);
+  }
+
+  public async refresh(userData: IUserData): Promise<TokenPairResDto> {
+    return AuthMapper.toResponseTokensDTO({} as any);
   }
 }
