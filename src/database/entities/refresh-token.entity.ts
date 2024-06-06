@@ -1,10 +1,10 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-import { TableNamesEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-names.enum';
 import { BaseModel } from './models/base.model';
 import { UserEntity } from './user.entity';
 
-@Entity({ name: TableNamesEnum.REFRESH_TOKENS })
+@Entity({ name: TableNameEnum.REFRESH_TOKENS })
 export class RefreshTokenEntity extends BaseModel {
   @Column('text')
   refreshToken: string;

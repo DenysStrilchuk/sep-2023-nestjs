@@ -8,13 +8,13 @@ import {
 } from 'typeorm';
 
 import { CommentEntity } from './comment.entity';
-import { TableNamesEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-names.enum';
 import { LikeEntity } from './like.entity';
 import { BaseModel } from './models/base.model';
 import { TagEntity } from './tag.entity';
 import { UserEntity } from './user.entity';
 
-@Entity({ name: TableNamesEnum.ARTICLES })
+@Entity({ name: TableNameEnum.ARTICLES })
 export class ArticleEntity extends BaseModel {
   @Column('text')
   title: string;

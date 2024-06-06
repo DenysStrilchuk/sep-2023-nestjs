@@ -2,13 +2,13 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
 import { CommentEntity } from './comment.entity';
-import { TableNamesEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-names.enum';
 import { FollowEntity } from './follow.entity';
 import { LikeEntity } from './like.entity';
 import { BaseModel } from './models/base.model';
 import { RefreshTokenEntity } from './refresh-token.entity';
 
-@Entity({ name: TableNamesEnum.USERS })
+@Entity({ name: TableNameEnum.USERS })
 export class UserEntity extends BaseModel {
   @Column('text')
   name: string;

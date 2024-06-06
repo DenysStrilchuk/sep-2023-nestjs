@@ -1,11 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
-import { TableNamesEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-names.enum';
 import { BaseModel } from './models/base.model';
 import { UserEntity } from './user.entity';
 
-@Entity({ name: TableNamesEnum.COMMENTS })
+@Entity({ name: TableNameEnum.COMMENTS })
 export class CommentEntity extends BaseModel {
   @Column('text')
   body: string;

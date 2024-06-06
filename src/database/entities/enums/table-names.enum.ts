@@ -1,4 +1,4 @@
-export enum TableNamesEnum {
+export enum TableNameEnum {
   USERS = 'users',
   REFRESH_TOKENS = 'refresh_tokens',
   ARTICLES = 'articles',
