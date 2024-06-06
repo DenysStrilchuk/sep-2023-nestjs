@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 import { CommentEntity } from './comment.entity';
-import { TableNameEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-name.enum';
 import { LikeEntity } from './like.entity';
 import { BaseModel } from './models/base.model';
 import { TagEntity } from './tag.entity';

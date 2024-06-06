@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-import { TableNameEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-name.enum';
 import { BaseModel } from './models/base.model';
 import { UserEntity } from './user.entity';
 
@@ -14,7 +14,7 @@ export class RefreshTokenEntity extends BaseModel {
 
   @Column()
   user_id: string;
-  @ManyToOne(() => UserEntity, (entity) => entity.refreshToken)
+  @ManyToOne(() => UserEntity, (entity) => entity.refreshTokens)
   @JoinColumn({ name: 'user_id' })
   user?: UserEntity;
 }

@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
 import { CommentEntity } from './comment.entity';
-import { TableNameEnum } from './enums/table-names.enum';
+import { TableNameEnum } from './enums/table-name.enum';
 import { FollowEntity } from './follow.entity';
 import { LikeEntity } from './like.entity';
 import { BaseModel } from './models/base.model';
@@ -26,7 +26,7 @@ export class UserEntity extends BaseModel {
   image?: string;
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
-  refreshToken?: RefreshTokenEntity[];
+  refreshTokens?: RefreshTokenEntity[];
 
   @OneToMany(() => ArticleEntity, (entity) => entity.user)
   articles?: ArticleEntity[];
