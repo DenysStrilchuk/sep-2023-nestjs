@@ -36,7 +36,6 @@ export class AuthCacheService {
     const set = await this.redisService.sMembers(key);
     return set.includes(token);
   }
-
   public async deleteToken(userId: string, deviceId: string): Promise<void> {
     const key = this.getKey(userId, deviceId);
     await this.redisService.deleteByKey(key);

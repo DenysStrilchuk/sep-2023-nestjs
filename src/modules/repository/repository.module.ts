@@ -9,13 +9,13 @@ import { TagRepository } from './services/tag.repository';
 import { UserRepository } from './services/user.repository';
 
 const repositories = [
-  UserRepository,
   ArticleRepository,
   CommentRepository,
   FollowRepository,
   LikeRepository,
   RefreshTokenRepository,
   TagRepository,
+  UserRepository,
 ];
 
 @Global()
