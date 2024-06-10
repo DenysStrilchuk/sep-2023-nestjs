@@ -31,7 +31,9 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     }
 
     if (query.search) {
-      qb.andWhere('');
+      qb.andWhere(
+        'CONCAT(LOWER(article.title), LOWER(article.description), LOWER(article.body)) LIKE :search',
+      );
       qb.setParameter('search', `%${query.search}%`);
     }
 
