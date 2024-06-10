@@ -25,6 +25,16 @@ export class ArticleRepository extends Repository<ArticleEntity> {
     );
     qb.setParameter('myId', userData.userId);
 
+    if (query.tag) {
+      qb.andWhere('tag.name = :tag');
+      qb.setParameter('tag', query.tag);
+    }
+
+    if (query.search) {
+      qb.andWhere('');
+      qb.setParameter('search', `%${query.search}%`);
+    }
+
     qb.orderBy('article.created', 'DESC');
     qb.take(query.limit);
     qb.skip(query.offset);
