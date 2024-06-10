@@ -1,10 +1,29 @@
-import { PickType } from '@nestjs/swagger';
+import { Transform, Type } from 'class-transformer';
+import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 
-import { BaseArticleReqDto } from './base-article.req.dto';
+import { TransformHelper } from '../../../../common/helpers/transform.helper';
 
-export class CreateArticleReqDto extends PickType(BaseArticleReqDto, [
-  'title',
-  'description',
-  'body',
-  'tags',
-]) {}
+export class ArticleListReqDto {
+  @Type(() => Number)
+  @IsInt()
+  @Max(100)
+  @Min(1)
+  @IsOptional()
+  limit?: number = 10;
+
+  @Type(() => Number)
+  @IsInt()
+  @Min(0)
+  @IsOptional()
+  offset?: number = 0;
+
+  @IsString()
+  @IsOptional()
+  tag?: string;
+
+  @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
+  @IsString()
+  @IsOptional()
+  search?: string;
+}
