@@ -5,7 +5,7 @@
 
 sept-2023-api-db
 sept-2023-api-s3-data
-
+/environments/prod.env
 # Logs
 logs
 *.log
